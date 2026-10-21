@@ -62,6 +62,8 @@ The reference view does not edit the specification. If parsing fails, it shows a
 
 ## Settings
 
+After a minor or major update, this plugin opens one What's new tab in the background. The tab and settings card suggest other NoteMods plugins and Zovo Chat and link to notemods.com for feedback ([privacy](https://notemods.com/privacy/)). The tab sends no data. Turn the tab off in Settings.
+
 The settings tab contains the optional GitHub Sponsors controls. It has the price, sponsorship link, sign-in action, and account status. After sign-in, Refresh requests a new sponsorship check. Sign out clears the stored token and turns Pro off.
 
 The file picker, tag menu, and Reload source button are in the reader workflow. Endpoint notes have a fixed output location: endpoint notes go in the vault root. Reload source applies source edits to the view. Named filters store a tag label, so a filter can be reused with a different file that uses that label.

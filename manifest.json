@@ -1,7 +1,7 @@
 {
 	"id": "openapi-spec-viewer",
 	"name": "Local API Reference",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"minAppVersion": "1.13.4",
 	"description": "Read local OpenAPI files as endpoint lists with parameter and response details.",
 	"author": "Michael Lip",

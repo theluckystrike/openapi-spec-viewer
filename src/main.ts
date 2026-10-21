@@ -5,12 +5,16 @@ import { SPONSORS, bindPro, isPro, resetPro } from './pro';
 import { ReferenceSettings, normalizeSaved, type Saved } from './settings';
 import { endpointMarkdown, type Endpoint } from './model';
 import { ReferenceView, VIEW_TYPE } from './view';
+import { setupHello } from './hello/index';
+import WHATS_NEW from './whats-new.json';
 
 export default class LocalApiPlugin extends Plugin {
 	settings: Saved = { bookmarks: [], filters: [] };
 	pro: SponsorsManager | null = null;
 	readonly views = new Set<ReferenceView>();
 	async onload(): Promise<void> {
+		// First: "What's new" reads its state before the settings load (packages/hello). It does not wait.
+		setupHello(this, WHATS_NEW);
 		this.settings = normalizeSaved(await this.loadData() as unknown);
 		const pro = createGitHubSponsors(this.app, this.manifest.id, SPONSORS, this);
 		this.pro = pro;
