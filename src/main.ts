@@ -1,7 +1,7 @@
 import { Modal, Notice, Plugin, Setting, normalizePath, type TFile } from 'obsidian';
 import { createGitHubSponsors } from './license/github-obsidian';
 import type { SponsorsManager } from './license/index';
-import { SPONSORS, bindPro, isPro, resetPro } from './pro';
+import { SPONSORS, bindPro, isPro, resetPro, proNotice } from './pro';
 import { ReferenceSettings, normalizeSaved, type Saved } from './settings';
 import { endpointMarkdown, type Endpoint } from './model';
 import { ReferenceView, VIEW_TYPE } from './view';
@@ -37,7 +37,7 @@ export default class LocalApiPlugin extends Plugin {
 	}
 	async saveSettings(): Promise<void> { await this.saveData(this.settings); }
 	async bookmark(source: string, endpoint: string): Promise<boolean> {
-		if (!isPro()) { new Notice('Endpoint bookmarks need pro.'); return false; }
+		if (!isPro()) { proNotice('Endpoint bookmarks need pro.'); return false; }
 		const next = this.settings.bookmarks.slice();
 		const index = next.findIndex((b) => b.source === source && b.endpoint === endpoint);
 		if (index < 0) next.push({ source, endpoint }); else next.splice(index, 1);
@@ -45,7 +45,7 @@ export default class LocalApiPlugin extends Plugin {
 		catch { new Notice('Could not save the bookmark.'); return false; }
 	}
 	async saveFilter(name: string, tag: string): Promise<boolean> {
-		if (!isPro()) { new Notice('Named tag filters need pro.'); return false; }
+		if (!isPro()) { proNotice('Named tag filters need pro.'); return false; }
 		if (!name.trim() || !tag) { new Notice('Enter a name and select a tag.'); return false; }
 		const filters = this.settings.filters.filter((f) => f.name !== name.trim());
 		filters.push({ name: name.trim(), tag });
@@ -53,7 +53,7 @@ export default class LocalApiPlugin extends Plugin {
 		catch { new Notice('Could not save the filter.'); return false; }
 	}
 	async exportEndpoint(endpoint: Endpoint, source: string): Promise<TFile | null> {
-		if (!isPro()) { new Notice('Endpoint notes need pro.'); return null; }
+		if (!isPro()) { proNotice('Endpoint notes need pro.'); return null; }
 		const stem = `API ${endpoint.id}`.replace(/[^\p{L}\p{N} _-]/gu, ' ').replace(/\s+/g, ' ').trim().slice(0, 100);
 		for (let index = 0; index < 1000; index++) {
 			const path = normalizePath(`${stem}${index ? ` ${index + 1}` : ''}.md`);

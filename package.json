@@ -1,7 +1,6 @@
 {
 	"name": "openapi-spec-viewer",
-	"repository": {"type": "git", "url": "theluckystrike/openapi-spec-viewer.git"},
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"private": true,
 	"description": "Read local OpenAPI files as endpoint lists with parameter and response details.",
 	"main": "main.js",

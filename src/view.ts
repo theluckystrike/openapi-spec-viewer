@@ -85,12 +85,11 @@ export class ReferenceView extends ItemView {
 		el.createEl('h2', { text: e.id });
 		el.createEl('h3', { text: e.summary || 'Endpoint details' });
 		el.createEl('p', { text: e.description, cls: 'lar-description' });
-		if (isPro()) {
-			const actions = el.createDiv({ cls: 'lar-controls' });
-			button(actions, 'Write endpoint note (Pro)', () => void this.owner.exportEndpoint(e, this.path));
-			const saved = this.owner.settings.bookmarks.some((b) => b.source === this.path && b.endpoint === e.id);
-			button(actions, saved ? 'Remove bookmark (Pro)' : 'Bookmark endpoint (Pro)', () => { void this.owner.bookmark(this.path, e.id).then(() => this.render()); });
-		}
+		// Free users see the two Pro buttons too: exportEndpoint and bookmark show the Pro notice and save nothing.
+		const actions = el.createDiv({ cls: 'lar-controls' });
+		button(actions, 'Write endpoint note (Pro)', () => void this.owner.exportEndpoint(e, this.path));
+		const saved = this.owner.settings.bookmarks.some((b) => b.source === this.path && b.endpoint === e.id);
+		button(actions, saved ? 'Remove bookmark (Pro)' : 'Bookmark endpoint (Pro)', () => { void this.owner.bookmark(this.path, e.id).then(() => this.render()); });
 		for (const warning of e.warnings) el.createEl('p', { text: warning, cls: 'lar-error' });
 		el.createEl('h3', { text: 'Parameters' });
 		if (!e.parameters.length) el.createEl('p', { text: 'No parameters declared.' });

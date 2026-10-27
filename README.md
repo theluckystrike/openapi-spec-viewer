@@ -40,7 +40,7 @@ Select "Write endpoint note (Pro)" to create a Markdown note in the vault root. 
 
 ### Save bookmarks and tag filters (Pro)
 
-Bookmark the selected endpoint to add it above the tag sections. Bookmarks belong to a source path and endpoint ID. Select the bookmark to return to that detail panel. To save a filter, select a tag, enter a name, and select Save filter. Saving the same name replaces its tag. These choices are stored in the plugin data. When Pro is off, they stay saved and their controls are hidden.
+Bookmark the selected endpoint to add it above the tag sections. Bookmarks belong to a source path and endpoint ID. Select the bookmark to return to that detail panel. To save a filter, select a tag, enter a name, and select Save filter. Saving the same name replaces its tag. These choices are stored in the plugin data. When Pro is off, they stay saved, and the bookmark list and the filter controls are hidden. The Write endpoint note and Bookmark endpoint buttons stay in the detail panel. Without Pro, a click shows the Pro notice with a Sponsor on GitHub button and saves nothing.
 
 <img src="https://raw.githubusercontent.com/theluckystrike/openapi-spec-viewer/HEAD/docs/bookmarks.png" alt="A saved endpoint bookmark and named Pets tag filter" width="720">
 

@@ -56,13 +56,16 @@ describe('review defects', () => {
 			expect(names()).toEqual(['a/api.json']);
 		});
 	});
-	it('offers array items and hides Pro controls and saved bookmarks when Pro is off', async () => {
+	it('offers array items and hides saved bookmarks and filters when Pro is off', async () => {
 		const src = JSON.stringify({ openapi: '3.0.3', paths: { '/a': { get: { responses: { '200': { content: { 'application/json': { schema: { type: 'array', items: { $ref: '#/components/schemas/P' } } } } } } } } }, components: { schemas: { P: { properties: { n: { type: 'string' } } } } } });
 		const app = App.createConfigured__({ files: { 'a.json': src } });
 		const p = new LocalApiPlugin(app as never, manifest as never);
 		p.settings = { bookmarks: [{ source: 'a.json', endpoint: 'GET /a' }], filters: [{ name: 'F', tag: 'Untagged' }] };
 		const v = new ReferenceView(p.app.workspace.getLeaf('tab'), p); v.path = 'a.json'; await v.reload();
-		expect(v.contentEl.textContent).not.toContain('(Pro)');
+		// The Pro endpoint buttons show for a free user (a click shows the Pro notice). The bookmark list and the filter form stay hidden.
+		expect([...v.contentEl.querySelectorAll('.lar-detail button')].map((b) => b.textContent)).toEqual(expect.arrayContaining(['Write endpoint note (Pro)', 'Remove bookmark (Pro)']));
+		expect(v.contentEl.querySelector('.lar-endpoints')?.textContent).not.toContain('(Pro)');
+		expect(v.contentEl.querySelector('input[aria-label="Filter name"]')).toBeNull();
 		expect(v.contentEl.querySelector('.lar-saved-filter')).toBeNull();
 		(v.contentEl.querySelector('.lar-schema-links button') as HTMLButtonElement).click();
 		const items = [...v.contentEl.querySelectorAll('.lar-schema button')].find((b) => b.textContent === 'Open array items') as HTMLButtonElement;
