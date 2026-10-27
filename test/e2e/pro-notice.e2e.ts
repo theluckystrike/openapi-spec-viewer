@@ -63,12 +63,12 @@ describe('Endpoint note and bookmark buttons for a free user and a Pro user', fu
 		await open();
 		const before = await state();
 		await click(NOTE);
-		await browser.waitUntil(async () => (await state()).notices.some((n) => n.text.includes('Endpoint notes need pro.')), { timeout: 5000, timeoutMsg: 'No Pro notice after Write endpoint note.' });
+		await browser.waitUntil(async () => (await state()).notices.some((n) => n.text.includes('Endpoint notes need Pro.')), { timeout: 5000, timeoutMsg: 'No Pro notice after Write endpoint note.' });
 		await click(MARK);
-		await browser.waitUntil(async () => (await state()).notices.some((n) => n.text.includes('Endpoint bookmarks need pro.')), { timeout: 5000, timeoutMsg: 'No Pro notice after Bookmark endpoint.' });
+		await browser.waitUntil(async () => (await state()).notices.some((n) => n.text.includes('Endpoint bookmarks need Pro.')), { timeout: 5000, timeoutMsg: 'No Pro notice after Bookmark endpoint.' });
 		await browser.pause(500);
 		const after = await state();
-		for (const lead of ['Endpoint notes need pro.', 'Endpoint bookmarks need pro.']) expect(after.notices.find((n) => n.text.includes(lead))!.buttons).toBe(1);
+		for (const lead of ['Endpoint notes need Pro.', 'Endpoint bookmarks need Pro.']) expect(after.notices.find((n) => n.text.includes(lead))!.buttons).toBe(1);
 		expect(after.notes).toEqual([]);
 		expect(after.data).toBe(before.data);
 		expect(after.buttons).toContain(MARK);

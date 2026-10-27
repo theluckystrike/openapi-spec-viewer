@@ -1,5 +1,11 @@
 # openapi-spec-viewer
 
+## 1.1.2
+
+### Patch Changes
+
+- 8e3e6ca: The Pro notices for endpoint notes, bookmarks and named tag filters now write "Pro" with a capital P.
+
 ## 1.1.1
 
 ### Patch Changes

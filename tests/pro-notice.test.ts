@@ -54,8 +54,8 @@ describe('Endpoint note and bookmark buttons for a free user and a Pro user', ()
 		button(v, NOTE)!.click(); await flush();
 		button(v, MARK)!.click(); await flush();
 		expect(shown).toEqual([
-			{ text: `Endpoint notes need pro. ${PITCH}Sponsor on GitHub`, buttons: 1 },
-			{ text: `Endpoint bookmarks need pro. ${PITCH}Sponsor on GitHub`, buttons: 1 },
+			{ text: `Endpoint notes need Pro. ${PITCH}Sponsor on GitHub`, buttons: 1 },
+			{ text: `Endpoint bookmarks need Pro. ${PITCH}Sponsor on GitHub`, buttons: 1 },
 		]);
 		expect(create).not.toHaveBeenCalled();
 		expect(save).not.toHaveBeenCalled();
